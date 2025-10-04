@@ -1,22 +1,22 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Lato } from "next/font/google";
 import "../index.css";
 import Header from "@/components/header";
 import Providers from "@/components/providers";
 
-const geistSans = Geist({
-	variable: "--font-geist-sans",
+const lato = Lato({
+	variable: "--font-lato",
 	subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-	variable: "--font-geist-mono",
-	subsets: ["latin"],
+	weight: ["100", "300", "400", "700", "900"],
 });
 
 export const metadata: Metadata = {
-	title: "my-better-t-app",
-	description: "my-better-t-app",
+	title: "Zentri",
+	description:
+		"Zentri – A modern productivity app combining tasks, subtasks, and notes into one seamless workspace.",
+	icons: {
+		icon: "/zentri_favicon.png",
+	},
 };
 
 export default function RootLayout({
@@ -26,9 +26,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en" suppressHydrationWarning>
-			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-			>
+			<body className={`${lato.variable} antialiased`}>
 				<Providers>
 					<div className="grid h-svh grid-rows-[auto_1fr]">
 						<Header />
