@@ -1,8 +1,7 @@
-import { eq } from "drizzle-orm";
+import { db, eq } from "@zentri/db";
+import { todo } from "@zentri/db/schema/todo";
 import z from "zod";
-import { db } from "../db";
-import { todo } from "../db/schema/todo";
-import { publicProcedure, router } from "../lib/trpc";
+import { publicProcedure, router } from "../index";
 
 export const todoRouter = router({
 	getAll: publicProcedure.query(async () => {

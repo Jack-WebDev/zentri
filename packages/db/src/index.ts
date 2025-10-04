@@ -1,3 +1,4 @@
+import { eq } from "drizzle-orm";
 import type { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
@@ -7,6 +8,7 @@ const pool = new Pool({
 	connectionString: process.env.DATABASE_URL,
 });
 
-export const db: NodePgDatabase<typeof schema> = drizzle(pool, { schema });
+export type DB = NodePgDatabase<typeof schema>;
+export const db: DB = drizzle(pool, { schema });
 
-export { schema };
+export { schema, eq };

@@ -1,6 +1,6 @@
 {
 	"$schema": "https://turbo.build/schema.json",
-	"ui": "tui",
+	"ui": "stream",
 	"tasks": {
 		"build": {
 			"dependsOn": ["^build"],
@@ -8,10 +8,12 @@
 			"outputs": ["dist/**"]
 		},
 		"lint": {
-			"dependsOn": ["^lint"]
+			"dependsOn": ["^lint"],
+			"outputs": []
 		},
 		"check-types": {
-			"dependsOn": ["^check-types"]
+			"dependsOn": ["^check-types"],
+			"outputs": []
 		},
 		"dev": {
 			"cache": false,

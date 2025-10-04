@@ -28,7 +28,8 @@
 		"drizzle-orm": "^0.44.2",
 		"better-auth": "^1.3.13",
 		"@zentri/db": "workspace:*",
-		"@zentri/auth": "workspace:*"
+		"@zentri/auth": "workspace:*",
+		"@zentri/api": "workspace:*"
 	},
 	"devDependencies": {
 		"tsdown": "^0.15.1",
