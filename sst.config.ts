@@ -11,5 +11,6 @@ export default $config({
 	},
 	async run() {
 		await import("./stacks/network");
+		await import("./stacks/storage");
 	},
 });
