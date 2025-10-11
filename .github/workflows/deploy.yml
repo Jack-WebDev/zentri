@@ -7,15 +7,14 @@ on:
 env:
   CI: true
   AWS_REGION: "af-south-1"
-  STAGE: ${{ github.ref_name == 'main' && 'prod' || 'dev' }}
+  STAGE: "prod"
 
 jobs:
   deployment:
     name: Deploy App
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    environment:
-      name: ${{ github.ref_name == 'main' && 'prod' || 'preview' }}
+    environment: prod
     permissions:
       id-token: write
       contents: read
@@ -62,9 +61,20 @@ jobs:
 
       - name: Validate stage
         run: |
-          if [ -z "${{ env.STAGE }}" ] || [ "${{ env.STAGE }}" = "false" ]; then
-            echo "STAGE is not set correctly"; exit 1;
+          if [ -z "${{ env.STAGE }}" ]; then
+            echo "❌ STAGE not set correctly"; exit 1;
           fi
+          echo "✅ STAGE is ${{ env.STAGE }}"
+
+      - name: Debug OIDC token
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const token = await core.getIDToken('sts.amazonaws.com');
+            const payload = JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString());
+            core.info(`🔹 OIDC aud: ${payload.aud}`);
+            core.info(`🔹 OIDC sub: ${payload.sub}`);
+            core.info(`🔹 Issuer: ${payload.iss}`);
 
       - name: Configure AWS credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v4
