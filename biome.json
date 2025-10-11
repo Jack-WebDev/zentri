@@ -25,7 +25,8 @@
 			"!**/.svelte-kit",
 			"!**/wrangler.jsonc",
 			"!**/.source",
-			"!**/.sst"
+			"!**/.sst",
+			"!sst-env.d.ts"
 		]
 	},
 	"formatter": {

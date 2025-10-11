@@ -11,30 +11,41 @@ export function Storage() {
 				allowOrigins: ["*"],
 				allowHeaders: ["*"],
 			},
-
 			transform: {
 				bucket: (args) => {
 					args.bucket = `${$app.name}-${$app.stage}-storage-bucket`;
-
 					args.forceDestroy = !isProd;
 					args.tags = {
 						...(args.tags ?? {}),
 						Name: `${$app.name}-${$app.stage}-storage-bucket`,
 					};
 				},
-
-				publicAccessBlock: (args) => {
-					args.blockPublicAcls = false;
-				},
 			},
 		},
-
 		{ protect: isProd },
 	);
 
 	new aws.s3.BucketOwnershipControls("BucketOwnership", {
 		bucket: bucket.nodes.bucket.id,
-		rule: { objectOwnership: "ObjectWriter" },
+		rule: { objectOwnership: "BucketOwnerEnforced" },
+	});
+
+	new aws.s3.BucketLifecycleConfigurationV2("BucketLifecycle", {
+		bucket: bucket.nodes.bucket.id,
+		rules: [
+			{
+				id: "AbortIncompleteMPU",
+				status: "Enabled",
+				abortIncompleteMultipartUpload: { daysAfterInitiation: 7 },
+				filter: {},
+			},
+			{
+				id: "NoncurrentCleanup",
+				status: "Enabled",
+				noncurrentVersionExpiration: { noncurrentDays: 30 },
+				filter: {},
+			},
+		],
 	});
 
 	return bucket;

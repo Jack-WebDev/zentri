@@ -15,6 +15,9 @@ export function Network() {
 		vpcId: vpc.id,
 		description: "Allow HTTP/HTTPS and SSH",
 		tags: { Name: `${$app.name}-${$app.stage}-web-sg` },
+		ingress: [],
+		egress: [],
+		revokeRulesOnDelete: true,
 	});
 
 	new aws.vpc.SecurityGroupIngressRule("web-80", {

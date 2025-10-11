@@ -7,8 +7,12 @@ export default $config({
 			removal: input?.stage === "prod" ? "retain" : "remove",
 			protect: ["prod"].includes(input?.stage),
 			home: "aws",
+			providers: {
+				aws: { profile: "zentri-prod", region: "af-south-1" },
+			},
 		};
 	},
+
 	async run() {
 		const { Network } = await import("./stacks/network");
 		const { Storage } = await import("./stacks/storage");

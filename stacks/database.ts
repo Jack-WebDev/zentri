@@ -12,7 +12,7 @@ export function Database(props: { network: NetworkReturn }) {
 
 	const dbSg = new aws.ec2.SecurityGroup("db-sg", {
 		vpcId: net.vpcId,
-		description: "Aurora Postgres public access (restricted by IP)",
+		description: "RDS Postgres public access",
 		tags: { Name: `${$app.name}-${$app.stage}-db-sg` },
 	});
 
@@ -22,7 +22,6 @@ export function Database(props: { network: NetworkReturn }) {
 		fromPort: 5432,
 		toPort: 5432,
 		cidrIpv4: "0.0.0.0/0",
-		description: "Postgres public access (open to all)",
 	});
 
 	new aws.vpc.SecurityGroupEgressRule("db-egress-all", {
@@ -37,88 +36,58 @@ export function Database(props: { network: NetworkReturn }) {
 		tags: { Name: `${$app.name}-${$app.stage}-db-subnet-group` },
 	});
 
-	const dbUser = "appuser";
+	const pg = new aws.rds.ParameterGroup("pg-params", {
+		family: "postgres16",
+		parameters: [
+			{ name: "rds.force_ssl", value: "1" },
+			{ name: "log_connections", value: "1" },
+			{ name: "log_disconnections", value: "1" },
+			{ name: "log_min_duration_statement", value: "2000" },
+		],
+		tags: { Name: `${$app.name}-${$app.stage}-pg-params` },
+	});
+
+	const username = "appuser";
 	const pwd = new random.RandomPassword("db-password", {
 		length: 20,
 		overrideSpecial: "_-",
 	});
 
-	const secret = new aws.secretsmanager.Secret("db-secret", {
+	const secret = new aws.secretsmanager.Secret("db-prod-secret", {
 		name: `${$app.name}/${$app.stage}/db`,
-		description: "Aurora database credentials",
+		description: "RDS Postgres credentials",
 	});
 
-	const secretVersion = new aws.secretsmanager.SecretVersion("db-secret-v1", {
-		secretId: secret.id,
-		secretString: pwd.result.apply((password) =>
-			JSON.stringify({ username: dbUser, password }),
-		),
-	});
-
-	const pg = new aws.rds.ClusterParameterGroup("aurora-pg", {
-		family: "aurora-postgresql16",
-		parameters: [{ name: "rds.force_ssl", value: "1" }],
-		tags: { Name: `${$app.name}-${$app.stage}-aurora-params` },
-	});
-
-	const cluster = new aws.rds.Cluster("aurora-cluster", {
-		engine: "aurora-postgresql",
-		databaseName: $app.stage,
-		masterUsername: dbUser,
-		masterPassword: pwd.result,
-
+	const instance = new aws.rds.Instance("rds-postgres", {
+		engine: "postgres",
+		engineVersion: "16",
+		instanceClass: "db.t4g.micro",
+		allocatedStorage: 20,
+		maxAllocatedStorage: 20,
+		storageType: "gp2",
+		multiAz: false,
 		dbSubnetGroupName: subnetGroup.name,
 		vpcSecurityGroupIds: [dbSg.id],
-		dbClusterParameterGroupName: pg.name,
-
-		storageEncrypted: true,
-		backupRetentionPeriod: isProd ? 7 : 1,
-		deletionProtection: isProd,
-		copyTagsToSnapshot: true,
-
-		serverlessv2ScalingConfiguration: {
-			minCapacity: 0.5,
-			maxCapacity: isProd ? 2 : 1,
-		},
-
-		tags: { Name: `${$app.name}-${$app.stage}-aurora-cluster` },
-	});
-
-	const instance = new aws.rds.ClusterInstance("aurora-cluster-instance-1", {
-		clusterIdentifier: cluster.id,
-		instanceClass: "db.serverless",
-		engine: "aurora-postgresql",
-		engineVersion: cluster.engineVersion,
 		publiclyAccessible: true,
-		tags: { Name: `${$app.name}-${$app.stage}-aurora-instance-1` },
+		username,
+		password: pwd.result,
+		storageEncrypted: true,
+		backupRetentionPeriod: 1,
+		deletionProtection: isProd,
+		autoMinorVersionUpgrade: true,
+		parameterGroupName: pg.name,
+		copyTagsToSnapshot: true,
+		performanceInsightsEnabled: false,
+		enabledCloudwatchLogsExports: [],
+
+		tags: { Name: `${$app.name}-${$app.stage}-rds-postgres` },
 	});
 
-	const url = pulumi.interpolate`postgresql://${dbUser}:${pwd.result}@${cluster.endpoint}:5432/${$app.stage}`;
-
-	new aws.secretsmanager.SecretVersion(
-		"db-secret-url",
-		{
-			secretId: secret.id,
-			secretString: pulumi
-				.all([pwd.result, cluster.endpoint])
-				.apply(([password, host]) =>
-					JSON.stringify({
-						username: dbUser,
-						password,
-						host,
-						port: 5432,
-						database: $app.stage,
-						url: `postgresql://${dbUser}:${password}@${host}:5432/${$app.stage}`,
-					}),
-				),
-		},
-		{ dependsOn: [secretVersion, instance] },
-	);
-
+	const url = pulumi.interpolate`postgresql://${username}:${pwd.result}@${instance.address}:5432/${$app.stage}`;
 	const Database = new sst.Linkable("Database", {
 		properties: {
 			url: pulumi.secret(url),
-			host: cluster.endpoint,
+			host: instance.address,
 			port: 5432,
 			name: $app.stage,
 		},
@@ -127,8 +96,7 @@ export function Database(props: { network: NetworkReturn }) {
 	return {
 		Database,
 		url: pulumi.secret(url),
-		clusterArn: cluster.arn,
-		endpoint: cluster.endpoint,
+		endpoint: instance.address,
 		port: 5432,
 		dbSgId: dbSg.id,
 		subnetGroupName: subnetGroup.name,
