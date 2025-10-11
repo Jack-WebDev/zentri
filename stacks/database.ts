@@ -3,11 +3,12 @@
 import * as aws from "@pulumi/aws";
 import * as pulumi from "@pulumi/pulumi";
 import * as random from "@pulumi/random";
-import { Network } from "./network";
 
-export function Database() {
+type NetworkReturn = ReturnType<typeof import("./network").Network>;
+
+export function Database(props: { network: NetworkReturn }) {
 	const isProd = $app.stage === "prod";
-	const net = Network();
+	const net = props.network;
 
 	const dbSg = new aws.ec2.SecurityGroup("db-sg", {
 		vpcId: net.vpcId,

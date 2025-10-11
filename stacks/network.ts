@@ -51,10 +51,19 @@ export function Network() {
 		description: "Allow all outbound",
 	});
 
+	const network = new sst.Linkable("Network", {
+		properties: {
+			vpcId: vpc.id,
+			publicSubnetIds: vpc.publicSubnets,
+			securityGroupId: webSg.id,
+		},
+	});
+
 	return {
 		vpc,
 		vpcId: vpc.id,
 		publicSubnetIds: vpc.publicSubnets,
 		securityGroupId: webSg.id,
+		network,
 	};
 }

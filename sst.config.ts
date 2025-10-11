@@ -14,8 +14,8 @@ export default $config({
 		const { Storage } = await import("./stacks/storage");
 		const { Database } = await import("./stacks/database");
 
-		Network();
+		const network = Network();
 		Storage();
-		Database();
+		Database({ network });
 	},
 });
