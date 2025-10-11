@@ -10,7 +10,10 @@ export default $config({
 		};
 	},
 	async run() {
-		await import("./stacks/network");
-		await import("./stacks/storage");
+		const { Network } = await import("./stacks/network");
+		const { Storage } = await import("./stacks/storage");
+
+		Network();
+		Storage();
 	},
 });

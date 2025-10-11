@@ -1,6 +1,6 @@
 /// <reference types="sst" />
 
-export function storage() {
+export function Storage() {
 	const isProd = $app.stage === "prod";
 
 	const bucket = new sst.aws.Bucket(
