@@ -4,10 +4,12 @@ export default $config({
 	app(input) {
 		return {
 			name: "zentri",
-			removal: input?.stage === "production" ? "retain" : "remove",
-			protect: ["production"].includes(input?.stage),
+			removal: input?.stage === "prod" ? "retain" : "remove",
+			protect: ["prod"].includes(input?.stage),
 			home: "aws",
 		};
 	},
-	async run() {},
+	async run() {
+		await import("./stacks/network");
+	},
 });
