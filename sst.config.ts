@@ -12,8 +12,10 @@ export default $config({
 	async run() {
 		const { Network } = await import("./stacks/network");
 		const { Storage } = await import("./stacks/storage");
+		const { Database } = await import("./stacks/database");
 
 		Network();
 		Storage();
+		Database();
 	},
 });
