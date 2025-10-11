@@ -2,13 +2,16 @@
 
 export default $config({
 	app(input) {
+		const inCI = !!process.env.CI;
 		return {
 			name: "zentri",
 			removal: input?.stage === "prod" ? "retain" : "remove",
 			protect: ["prod"].includes(input?.stage),
 			home: "aws",
 			providers: {
-				aws: { profile: "zentri-prod", region: "af-south-1" },
+				aws: inCI
+					? { region: "af-south-1" }
+					: { profile: "zentri-prod", region: "af-south-1" },
 			},
 		};
 	},
