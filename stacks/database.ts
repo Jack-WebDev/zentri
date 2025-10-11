@@ -55,7 +55,7 @@ export function Database(props: { network: NetworkReturn }) {
 		),
 	});
 
-	const pg = new aws.rds.ParameterGroup("aurora-pg", {
+	const pg = new aws.rds.ClusterParameterGroup("aurora-pg", {
 		family: "aurora-postgresql16",
 		parameters: [{ name: "rds.force_ssl", value: "1" }],
 		tags: { Name: `${$app.name}-${$app.stage}-aurora-params` },
