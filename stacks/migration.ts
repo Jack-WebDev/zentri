@@ -32,7 +32,7 @@ export function Migration({
     nodejs: {
       install: ["pg", "drizzle-orm"],
     },
-
+    link: [db.Database],
     copyFiles: [
       { from: "packages/db/src/db/migrations", to: "drizzle" }, 
     ],

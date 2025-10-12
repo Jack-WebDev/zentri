@@ -1,49 +1,49 @@
 {
-	"name": "zentri",
-	"private": true,
-	"type": "module",
-	"workspaces": [
-		"apps/*",
-		"packages/*"
-	],
-	"scripts": {
-		"build": "turbo build",
-		"check": "biome check --write .",
-		"check-types": "turbo check-types",
-		"db:down": "turbo -F server db:down",
-		"db:generate": "turbo -F server db:generate",
-		"db:migrate": "turbo -F server db:migrate",
-		"db:push": "turbo -F server db:push",
-		"db:start": "turbo -F server db:start",
-		"db:stop": "turbo -F server db:stop",
-		"db:studio": "turbo -F server db:studio",
-		"db:watch": "turbo -F server db:watch",
-		"dev": "turbo dev",
-		"dev:native": "turbo -F native dev",
-		"dev:server": "turbo -F server dev",
-		"dev:web": "turbo -F web dev",
-		"prepare": "husky",
-		"refresh": "AWS_PROFILE=zentri-prod sst refresh --stage prod --print-logs",
-		"deploy": "AWS_PROFILE=zentri-prod sst deploy --stage prod --print-logs",
-		"remove:prod": "AWS_PROFILE=zentri-prod SST_STAGE=prod sst remove --print-logs"
-	},
-	"dependencies": {
-		"sst": "3.17.14"
-	},
-	"devDependencies": {
-		"@biomejs/biome": "^2.2.0",
-		"@pulumi/aws": "^7.8.0",
-		"@pulumi/pulumi": "^3.202.0",
-		"@pulumi/random": "^4.18.3",
-		"@types/aws-lambda": "8.10.155",
-		"husky": "^9.1.7",
-		"lint-staged": "^16.1.2",
-		"turbo": "^2.5.4"
-	},
-	"lint-staged": {
-		"*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": [
-			"biome check --write ."
-		]
-	},
-	"packageManager": "pnpm@10.15.1"
+  "name": "zentri",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo build",
+    "check": "biome check --write .",
+    "check-types": "turbo check-types",
+    "db:down": "turbo -F server db:down",
+    "db:push": "turbo -F @zentri/db db:push",
+    "db:studio": "turbo -F @zentri/db db:studio",
+    "db:generate": "turbo -F @zentri/db db:generate",
+    "db:migrate": "turbo -F @zentri/db db:migrate",
+    "db:start": "turbo -F server db:start",
+    "db:stop": "turbo -F server db:stop",
+    "db:watch": "turbo -F server db:watch",
+    "dev": "turbo dev",
+    "dev:native": "turbo -F native dev",
+    "dev:server": "turbo -F server dev",
+    "dev:web": "turbo -F web dev",
+    "prepare": "husky",
+    "refresh": "AWS_PROFILE=zentri-prod sst refresh --stage prod --print-logs",
+    "deploy": "AWS_PROFILE=zentri-prod sst deploy --stage prod --print-logs",
+    "remove:prod": "AWS_PROFILE=zentri-prod SST_STAGE=prod sst remove --print-logs"
+  },
+  "dependencies": {
+    "sst": "3.17.14"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.2.0",
+    "@pulumi/aws": "^7.8.0",
+    "@pulumi/pulumi": "^3.202.0",
+    "@pulumi/random": "^4.18.3",
+    "@types/aws-lambda": "8.10.155",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.2",
+    "turbo": "^2.5.4"
+  },
+  "lint-staged": {
+    "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": [
+      "biome check --write ."
+    ]
+  },
+  "packageManager": "pnpm@10.15.1"
 }
