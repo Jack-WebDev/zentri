@@ -12,8 +12,10 @@ export function Api({
   bucket: StorageReturn;
   db: DatabaseReturn;
 }) {
-  const auth = getSecretValues("auth", ["BETTER_AUTH_SECRET", "CORS_ORIGIN"] as const);
-
+  const auth = getSecretValues("auth", [
+    "BETTER_AUTH_SECRET",
+    "CORS_ORIGIN",
+  ] as const);
 
   const environment = {
     REGION: $app.providers.aws.region,
@@ -27,6 +29,12 @@ export function Api({
   };
 
   const api = new sst.aws.ApiGatewayV2("Api", {
+    cors: {
+      allowOrigins: ["https://d28o0pvx2zsvzm.cloudfront.net"],
+      allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+      allowHeaders: ["content-type", "authorization"],
+      allowCredentials: true,
+    },
     accessLog: { retention: "1 month" },
     link: [bucket],
     transform: {
