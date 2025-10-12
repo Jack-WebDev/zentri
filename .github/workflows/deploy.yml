@@ -56,6 +56,12 @@ jobs:
       - name: Build
         run: pnpm build
 
+      - name: Generate Drizzle migrations
+        run: pnpm --filter @zentri/db run db:generate
+
+      - name: List generated migrations
+        run: ls -la packages/db/src/db/migrations || true
+
       - name: Configure AWS credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v4
         with:
