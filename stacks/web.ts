@@ -1,16 +1,17 @@
 /// <reference types="sst" />
 
 type ApiReturn = ReturnType<typeof import("./api").Api>;
-type AuthReturn = ReturnType<typeof import("./auth").Authentication>;
 
-export function Web({ api: Api, auth }: { api: ApiReturn; auth: AuthReturn }) {
-	const site = new sst.aws.Nextjs("Web", {
-		path: "apps/web",
-		environment: {
-			API_URL: Api.url,
-		},
-		link: [Api, auth],
-	});
+export function Web({ api: Api }: { api: ApiReturn }) {
+  const site = new sst.aws.Nextjs("Web", {
+    path: "apps/web",
+    environment: {
+      BETTER_AUTH_URL: Api.url,
+      NEXT_PUBLIC_SERVER_URL: Api.url,
+      API_URL: Api.url,
+    },
+    link: [Api],
+  });
 
-	return site;
+  return site;
 }

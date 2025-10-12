@@ -5,6 +5,14 @@
 
 declare module "sst" {
   export interface Resource {
+    "Api": {
+      "type": "sst.aws.ApiGatewayV2"
+      "url": string
+    }
+    "Auth": {
+      "type": "sst.sst.Secret"
+      "value": string
+    }
     "Bucket": {
       "name": string
       "type": "sst.aws.Bucket"
@@ -24,6 +32,10 @@ declare module "sst" {
     }
     "Vpc": {
       "type": "sst.aws.Vpc"
+    }
+    "Web": {
+      "type": "sst.aws.Nextjs"
+      "url": string
     }
   }
 }
