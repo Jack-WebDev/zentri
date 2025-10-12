@@ -18,24 +18,26 @@
 		"db:down": "docker compose down"
 	},
 	"dependencies": {
-		"dotenv": "^17.2.1",
-		"zod": "^4.0.2",
-		"@trpc/server": "^11.5.0",
-		"@trpc/client": "^11.5.0",
-		"@hono/trpc-server": "^0.4.0",
-		"hono": "^4.8.2",
 		"@hono/node-server": "^1.14.4",
-		"drizzle-orm": "^0.44.2",
-		"better-auth": "^1.3.13",
-		"@zentri/db": "workspace:*",
+		"@hono/trpc-server": "^0.4.0",
+		"@trpc/client": "^11.5.0",
+		"@trpc/server": "^11.5.0",
+		"@zentri/api": "workspace:*",
 		"@zentri/auth": "workspace:*",
-		"@zentri/api": "workspace:*"
+		"@zentri/db": "workspace:*",
+		"better-auth": "^1.3.13",
+		"dotenv": "^17.2.1",
+		"drizzle-orm": "^0.44.2",
+		"hono": "^4.8.2",
+		"pg": "^8.16.3",
+		"zod": "^4.0.2"
 	},
 	"devDependencies": {
-		"tsdown": "^0.15.1",
-		"typescript": "^5.8.2",
-		"tsx": "^4.19.2",
 		"@types/node": "^22.13.11",
-		"drizzle-kit": "^0.31.2"
+		"@types/pg": "^8.15.5",
+		"drizzle-kit": "^0.31.2",
+		"tsdown": "^0.15.1",
+		"tsx": "^4.19.2",
+		"typescript": "^5.8.2"
 	}
 }
