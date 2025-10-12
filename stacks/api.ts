@@ -32,18 +32,18 @@ export function Api({
 		},
 	});
 
-	const identityAuth = api.addAuthorizer({
-		name: "IdentityAuthorizer",
-		lambda: {
-			function: {
-				handler: "apps/server/src/lambda/authorizer/identity.handler",
-				link: [bucket],
-				environment,
-				name: `${$app.name}-${$app.stage}-identity-authorizer`,
-			},
-			response: "iam",
-		},
-	});
+	// const identityAuth = api.addAuthorizer({
+	// 	name: "IdentityAuthorizer",
+	// 	lambda: {
+	// 		function: {
+	// 			handler: "apps/server/src/lambda/authorizer/identity.handler",
+	// 			link: [bucket],
+	// 			environment,
+	// 			name: `${$app.name}-${$app.stage}-identity-authorizer`,
+	// 		},
+	// 		response: "iam",
+	// 	},
+	// });
 
 	api.route(
 		"ANY /trpc",
@@ -52,7 +52,7 @@ export function Api({
 			timeout: "60 seconds",
 			environment,
 		},
-		{ auth: { lambda: identityAuth.id } },
+		// { auth: { lambda: identityAuth.id } },
 	);
 
 	api.route(
@@ -62,7 +62,7 @@ export function Api({
 			timeout: "60 seconds",
 			environment,
 		},
-		{ auth: { lambda: identityAuth.id } },
+		// { auth: { lambda: identityAuth.id } },
 	);
 
 	api.route("ANY /api/auth/{proxy+}", {
