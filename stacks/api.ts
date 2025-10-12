@@ -12,10 +12,8 @@ export function Api({
   bucket: StorageReturn;
   db: DatabaseReturn;
 }) {
-  const auth = getSecretValues("auth", [
-    "BETTER_AUTH_SECRET",
-    "CORS_ORIGIN",
-  ] as const);
+  const auth = getSecretValues("auth", ["BETTER_AUTH_SECRET", "CORS_ORIGIN"] as const);
+
 
   const environment = {
     REGION: $app.providers.aws.region,
@@ -24,7 +22,8 @@ export function Api({
     ATTACHMENTS_REGION: $app.providers.aws.region,
     DATABASE_URL: db.url,
     SERVER_PORT: "8080",
-    ...auth,
+    BETTER_AUTH_SECRET: auth.BETTER_AUTH_SECRET,
+    CORS_ORIGIN: auth.CORS_ORIGIN,
   };
 
   const api = new sst.aws.ApiGatewayV2("Api", {
