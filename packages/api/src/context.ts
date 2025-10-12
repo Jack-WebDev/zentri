@@ -1,5 +1,5 @@
 import { auth } from "@zentri/auth";
-import type { DB } from "@zentri/db"; // ✅ type alias, not value
+import type { DB } from "@zentri/db";
 import { db } from "@zentri/db";
 import type { Context as HonoContext } from "hono";
 
@@ -12,7 +12,6 @@ export async function createContext({ context }: CreateContextOptions) {
 	return { session, db };
 }
 
-// Clear, portable context type
 export type Context = {
 	session: Awaited<ReturnType<typeof auth.api.getSession>>;
 	db: DB;
