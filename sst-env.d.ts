@@ -4,29 +4,30 @@
 /* deno-fmt-ignore-file */
 
 declare module "sst" {
-	export interface Resource {
-		Bucket: {
-			name: string;
-			type: "sst.aws.Bucket";
-		};
-		Database: {
-			host: string;
-			name: string;
-			port: number;
-			type: "sst.sst.Linkable";
-			url: string;
-		};
-		Network: {
-			publicSubnetIds: any;
-			securityGroupId: string;
-			type: "sst.sst.Linkable";
-			vpcId: string;
-		};
-		Vpc: {
-			type: "sst.aws.Vpc";
-		};
-	}
+  export interface Resource {
+    "Bucket": {
+      "name": string
+      "type": "sst.aws.Bucket"
+    }
+    "Database": {
+      "host": string
+      "name": string
+      "port": number
+      "type": "sst.sst.Linkable"
+      "url": string
+    }
+    "Network": {
+      "publicSubnetIds": any
+      "securityGroupId": string
+      "type": "sst.sst.Linkable"
+      "vpcId": string
+    }
+    "Vpc": {
+      "type": "sst.aws.Vpc"
+    }
+  }
 }
 /// <reference path="sst-env.d.ts" />
 
-import "sst";
+import "sst"
+export {}

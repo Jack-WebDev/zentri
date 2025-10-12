@@ -79,11 +79,28 @@ export function Database(props: { network: NetworkReturn }) {
 		copyTagsToSnapshot: true,
 		performanceInsightsEnabled: false,
 		enabledCloudwatchLogsExports: [],
-
 		tags: { Name: `${$app.name}-${$app.stage}-rds-postgres` },
 	});
 
 	const url = pulumi.interpolate`postgresql://${username}:${pwd.result}@${instance.address}:5432/${$app.stage}`;
+
+	const secretVersion = new aws.secretsmanager.SecretVersion(
+		"db-prod-secret-version",
+		{
+			secretId: secret.id,
+			secretString: pulumi.secret(
+				pulumi.interpolate`{
+        "host": "${instance.address}",
+        "port": "5432",
+        "username": "${username}",
+        "password": "${pwd.result}",
+        "dbname": "${$app.stage}",
+        "url": "postgresql://${username}:${pwd.result}@${instance.address}:5432/${$app.stage}"
+      }`,
+			),
+		},
+	);
+
 	const Database = new sst.Linkable("Database", {
 		properties: {
 			url: pulumi.secret(url),
@@ -101,5 +118,6 @@ export function Database(props: { network: NetworkReturn }) {
 		dbSgId: dbSg.id,
 		subnetGroupName: subnetGroup.name,
 		secretArn: secret.arn,
+		secretVersionId: secretVersion.versionId,
 	};
 }
