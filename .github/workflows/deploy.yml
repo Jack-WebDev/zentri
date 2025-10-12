@@ -6,8 +6,8 @@ on:
 
 env:
   CI: true
-  AWS_REGION: "af-south-1"
-  STAGE: "prod"
+  AWS_REGION: af-south-1
+  STAGE: prod
 
 jobs:
   deployment:
@@ -59,14 +59,19 @@ jobs:
       - name: Generate Drizzle migrations
         run: pnpm --filter @zentri/db run db:generate
 
-      - name: List generated migrations
-        run: ls -la packages/db/src/db/migrations || true
+      - name: Verify generated migrations
+        run: |
+          ls -la packages/db/src/db/migrations
+          test -n "$(ls -A packages/db/src/db/migrations)"  # fail if empty
 
       - name: Configure AWS credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github-action-zentri-role
           aws-region: ${{ env.AWS_REGION }}
+
+      - name: Unlock stale SST deployment
+        run: pnpm exec sst unlock --stage=${{ env.STAGE }}
 
       - name: Deploy
         run: pnpm exec sst deploy --stage=${{ env.STAGE }}
