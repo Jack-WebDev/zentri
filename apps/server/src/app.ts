@@ -1,4 +1,3 @@
-// apps/server/src/app.ts
 import "dotenv/config";
 import { trpcServer } from "@hono/trpc-server";
 import { createContext } from "@zentri/api/context";

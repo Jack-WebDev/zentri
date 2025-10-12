@@ -1,17 +1,15 @@
-// /// <reference types="sst" />
+/// <reference types="sst" />
 
-// import { api } from "./api";
+type ApiReturn = ReturnType<typeof import("./api").Api>;
 
-// export function web() {
-//   const Api = api();
+export function Web({ api: Api }: { api: ApiReturn }) {
+	const site = new sst.aws.Nextjs("Web", {
+		path: "apps/web",
+		environment: {
+			API_URL: Api.url,
+		},
+		link: [Api],
+	});
 
-//   const site = new sst.aws.Nextjs("Web", {
-//     path: "apps/web",
-//     environment: {
-//       API_URL: Api.url,
-//     },
-//     link: [Api],
-//   });
-
-//   return site;
-// }
+	return site;
+}

@@ -21,10 +21,11 @@ export default $config({
 		const { Storage } = await import("./stacks/storage");
 		const { Database } = await import("./stacks/database");
 		const { Api } = await import("./stacks/api");
-
+		const { Web } = await import("./stacks/web");
 		const network = Network();
 		const bucket = Storage();
 		const db = Database({ network });
-		Api({ bucket, db });
+		const api = Api({ bucket, db });
+		Web({ api });
 	},
 });
