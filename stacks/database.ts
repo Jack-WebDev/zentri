@@ -59,6 +59,7 @@ export function Database(props: { network: NetworkReturn }) {
   });
 
   const instance = new aws.rds.Instance("rds-postgres", {
+    identifier: `${$app.name}-${$app.stage}-postgres`,
     engine: "postgres",
     engineVersion: "16",
     instanceClass: "db.t4g.micro",
@@ -73,7 +74,7 @@ export function Database(props: { network: NetworkReturn }) {
     password: pwd.result,
     storageEncrypted: true,
     backupRetentionPeriod: 1,
-    deletionProtection: isProd,
+    deletionProtection: false,
     skipFinalSnapshot: !isProd,
     deleteAutomatedBackups: true,
     finalSnapshotIdentifier: isProd
