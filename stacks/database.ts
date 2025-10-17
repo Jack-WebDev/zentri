@@ -74,6 +74,11 @@ export function Database(props: { network: NetworkReturn }) {
     storageEncrypted: true,
     backupRetentionPeriod: 1,
     deletionProtection: isProd,
+    skipFinalSnapshot: !isProd,
+    deleteAutomatedBackups: true,
+    finalSnapshotIdentifier: isProd
+      ? pulumi.interpolate`${$app.name}-${$app.stage}-final-${Date.now()}`
+      : undefined,
     autoMinorVersionUpgrade: true,
     parameterGroupName: pg.name,
     copyTagsToSnapshot: true,
