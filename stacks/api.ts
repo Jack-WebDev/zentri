@@ -1,6 +1,5 @@
 /// <reference types="sst" />
 
-import fs from "node:fs";
 import * as pulumi from "@pulumi/pulumi";
 import { getSecretValues } from "./helpers";
 
@@ -19,11 +18,6 @@ export function Api({
     "CORS_ORIGIN",
   ] as const);
 
-  const DATABASE_SSL_CA_PEM = fs.readFileSync(
-    "packages/infra/certs/af-south-1-bundle.pem",
-    "utf8"
-  );
-
   const environment = {
     REGION: $app.providers.aws.region,
     STAGE: $app.stage,
@@ -33,7 +27,6 @@ export function Api({
     SERVER_PORT: "8080",
     BETTER_AUTH_SECRET: auth.BETTER_AUTH_SECRET,
     CORS_ORIGIN: auth.CORS_ORIGIN,
-    DATABASE_SSL_CA_PEM,
   };
 
   const api = new sst.aws.ApiGatewayV2("Api", {

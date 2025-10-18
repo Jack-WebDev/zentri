@@ -1,4 +1,3 @@
-import fs from "node:fs";
 import type * as pulumi from "@pulumi/pulumi";
 import { getSecretValues } from "./helpers";
 
@@ -17,11 +16,6 @@ export function Migration({
     "CORS_ORIGIN",
   ] as const);
 
-   const DATABASE_SSL_CA_PEM = fs.readFileSync(
-    "packages/infra/certs/af-south-1-bundle.pem",
-    "utf8"
-  );
-
   const environment: Record<string, pulumi.Input<string>> = {
     REGION: $app.providers.aws.region,
     STAGE: $app.stage,
@@ -31,7 +25,6 @@ export function Migration({
     SERVER_PORT: "8080",
     BETTER_AUTH_SECRET: auth.BETTER_AUTH_SECRET,
     CORS_ORIGIN: auth.CORS_ORIGIN,
-    DATABASE_SSL_CA_PEM,
   };
 
   const migrate = new sst.aws.Function("DbMigrate", {
@@ -41,7 +34,11 @@ export function Migration({
     },
     link: [db.Database],
     copyFiles: [
-      { from: "packages/db/src/db/migrations", to: "drizzle" }, 
+      { from: "packages/db/src/db/migrations", to: "drizzle" },
+      {
+        from: "packages/infra/certs/af-south-1-bundle.pem",
+        to: "certs/af-south-1-bundle.pem",
+      },
     ],
     environment,
   });
