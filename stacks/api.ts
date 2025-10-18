@@ -1,6 +1,7 @@
 /// <reference types="sst" />
 
 import fs from "node:fs";
+import * as pulumi from "@pulumi/pulumi";
 import { getSecretValues } from "./helpers";
 
 type StorageReturn = ReturnType<typeof import("./storage").Storage>;
@@ -49,54 +50,64 @@ export function Api({
         handler: (args) => {
           args.environment = { ...environment, ...(args.environment ?? {}) };
           args.timeout ??= "60 seconds";
+          args.copyFiles = pulumi.output(args.copyFiles).apply((existing) => [
+            ...(existing ?? []),
+            {
+              from: "packages/infra/certs/af-south-1-bundle.pem",
+              to: "certs/af-south-1-bundle.pem",
+            },
+          ]);
         },
       },
     },
   });
 
-  // const identityAuth = api.addAuthorizer({
-  // 	name: "IdentityAuthorizer",
-  // 	lambda: {
-  // 		function: {
-  // 			handler: "apps/server/src/lambda/authorizer/identity.handler",
-  // 			link: [bucket],
-  // 			environment,
-  // 			name: `${$app.name}-${$app.stage}-identity-authorizer`,
-  // 		},
-  // 		response: "iam",
-  // 	},
-  // });
+  api.route("ANY /trpc", {
+    handler: "apps/server/src/lambda/trpc/server.handler",
+    timeout: "60 seconds",
+    environment,
+    copyFiles: [
+      {
+        from: "packages/infra/certs/af-south-1-bundle.pem",
+        to: "certs/af-south-1-bundle.pem",
+      },
+    ],
+  });
 
-  api.route(
-    "ANY /trpc",
-    {
-      handler: "apps/server/src/lambda/trpc/server.handler",
-      timeout: "60 seconds",
-      environment,
-    }
-    // { auth: { lambda: identityAuth.id } },
-  );
-
-  api.route(
-    "ANY /trpc/{proxy+}",
-    {
-      handler: "apps/server/src/lambda/trpc/server.handler",
-      timeout: "60 seconds",
-      environment,
-    }
-    // { auth: { lambda: identityAuth.id } },
-  );
+  api.route("ANY /trpc/{proxy+}", {
+    handler: "apps/server/src/lambda/trpc/server.handler",
+    timeout: "60 seconds",
+    environment,
+    copyFiles: [
+      {
+        from: "packages/infra/certs/af-south-1-bundle.pem",
+        to: "certs/af-south-1-bundle.pem",
+      },
+    ],
+  });
 
   api.route("ANY /api/auth/{proxy+}", {
     handler: "apps/server/src/lambda/trpc/server.handler",
     timeout: "60 seconds",
     environment,
+    copyFiles: [
+      {
+        from: "packages/infra/certs/af-south-1-bundle.pem",
+        to: "certs/af-south-1-bundle.pem",
+      },
+    ],
   });
 
   api.route("ANY /", {
     handler: "apps/server/src/lambda/trpc/server.handler",
     timeout: "60 seconds",
     environment,
+    copyFiles: [
+      {
+        from: "packages/infra/certs/af-south-1-bundle.pem",
+        to: "certs/af-south-1-bundle.pem",
+      },
+    ],
   });
 
   return api;
