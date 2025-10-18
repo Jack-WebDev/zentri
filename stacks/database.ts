@@ -89,7 +89,7 @@ export function Database(props: { network: NetworkReturn }) {
     dbName: $app.stage,
   });
 
-  const url = pulumi.interpolate`postgresql://${username}:${pwd.result}@${instance.address}:5432/${$app.stage}?sslmode=require`;
+  const url = pulumi.interpolate`postgresql://${username}:${pwd.result}@${instance.address}:5432/${$app.stage}?sslmode=verify-full`;
 
   const secretVersion = new aws.secretsmanager.SecretVersion(
     "db-prod-secret-version",
@@ -102,7 +102,7 @@ export function Database(props: { network: NetworkReturn }) {
         "username": "${username}",
         "password": "${pwd.result}",
         "dbname": "${$app.stage}",
-    	"url": "postgresql://${username}:${pwd.result}@${instance.address}:5432/${$app.stage}?sslmode=require"
+    	"url": "postgresql://${username}:${pwd.result}@${instance.address}:5432/${$app.stage}?sslmode=verify-full"
       }`
       ),
     }
