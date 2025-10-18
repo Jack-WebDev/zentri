@@ -3,13 +3,13 @@ import { drizzle } from "drizzle-orm/node-postgres";
 import type { NodePgDatabase } from "drizzle-orm/node-postgres";
 import * as schema from "./schema";
 import { eq } from "drizzle-orm";
-import path from "node:path";
-import fs from "node:fs";
 
-const ca = fs.readFileSync(
-  path.join(process.cwd(), "packages/infra/certs/af-south-1-bundle.pem"),
-  "utf8"
-);
+const ca = process.env.DATABASE_SSL_CA_PEM;
+if (!ca) {
+  throw new Error(
+    "Missing DATABASE_SSL_CA_PEM (paste your RDS CA PEM into this env var)."
+  );
+}
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
