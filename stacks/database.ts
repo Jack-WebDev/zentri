@@ -39,7 +39,7 @@ export function Database(props: { network: NetworkReturn }) {
   const pg = new aws.rds.ParameterGroup("pg-params", {
     family: "postgres16",
     parameters: [
-      { name: "rds.force_ssl", value: "1" },
+      { name: "rds.force_ssl", value: "0" },
       { name: "log_connections", value: "1" },
       { name: "log_disconnections", value: "1" },
       { name: "log_min_duration_statement", value: "2000" },
@@ -89,7 +89,7 @@ export function Database(props: { network: NetworkReturn }) {
     dbName: $app.stage,
   });
 
-  const url = pulumi.interpolate`postgresql://${username}:${pwd.result}@${instance.address}:5432/${$app.stage}?sslmode=verify-full`;
+  const url = pulumi.interpolate`postgresql://${username}:${pwd.result}@${instance.address}:5432/${$app.stage}?sslmode=disable`;
 
   const secretVersion = new aws.secretsmanager.SecretVersion(
     "db-prod-secret-version",
@@ -102,7 +102,7 @@ export function Database(props: { network: NetworkReturn }) {
         "username": "${username}",
         "password": "${pwd.result}",
         "dbname": "${$app.stage}",
-    	"url": "postgresql://${username}:${pwd.result}@${instance.address}:5432/${$app.stage}?sslmode=verify-full"
+    	"url": "postgresql://${username}:${pwd.result}@${instance.address}:5432/${$app.stage}?sslmode=disable"
       }`
       ),
     }

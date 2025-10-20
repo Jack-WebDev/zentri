@@ -25,7 +25,6 @@ export function Migration({
     SERVER_PORT: "8080",
     BETTER_AUTH_SECRET: auth.BETTER_AUTH_SECRET,
     CORS_ORIGIN: auth.CORS_ORIGIN,
-    NODE_EXTRA_CA_CERTS: "certs/af-south-1-bundle.pem",
   };
 
   const migrate = new sst.aws.Function("DbMigrate", {
@@ -34,13 +33,6 @@ export function Migration({
       install: ["pg", "drizzle-orm"],
     },
     link: [db.Database],
-    copyFiles: [
-      { from: "packages/db/src/db/migrations", to: "drizzle" },
-      {
-        from: "packages/infra/certs/af-south-1-bundle.pem",
-        to: "certs/af-south-1-bundle.pem",
-      },
-    ],
     environment,
   });
 

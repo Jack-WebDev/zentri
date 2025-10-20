@@ -27,7 +27,7 @@ export function Api({
     SERVER_PORT: "8080",
     BETTER_AUTH_SECRET: auth.BETTER_AUTH_SECRET,
     CORS_ORIGIN: auth.CORS_ORIGIN,
-    NODE_EXTRA_CA_CERTS: "certs/af-south-1-bundle.pem",
+    RDS_CA_SECRET_NAME: pulumi.interpolate`${$app.name}/${$app.stage}/rds-ca`,
   };
 
   const api = new sst.aws.ApiGatewayV2("Api", {
@@ -44,13 +44,13 @@ export function Api({
         handler: (args) => {
           args.environment = { ...environment, ...(args.environment ?? {}) };
           args.timeout ??= "60 seconds";
-          args.copyFiles = pulumi.output(args.copyFiles).apply((existing) => [
-            ...(existing ?? []),
-            {
-              from: "packages/infra/certs/af-south-1-bundle.pem",
-              to: "certs/af-south-1-bundle.pem",
-            },
-          ]);
+          // args.copyFiles = pulumi.output(args.copyFiles).apply((existing) => [
+          //   ...(existing ?? []),
+          //   {
+          //     from: "packages/infra/certs/af-south-1-bundle.pem",
+          //     to: "certs/af-south-1-bundle.pem",
+          //   },
+          // ]);
         },
       },
     },
@@ -60,48 +60,24 @@ export function Api({
     handler: "apps/server/src/lambda/trpc/server.handler",
     timeout: "60 seconds",
     environment,
-    copyFiles: [
-      {
-        from: "packages/infra/certs/af-south-1-bundle.pem",
-        to: "certs/af-south-1-bundle.pem",
-      },
-    ],
   });
 
   api.route("ANY /trpc/{proxy+}", {
     handler: "apps/server/src/lambda/trpc/server.handler",
     timeout: "60 seconds",
     environment,
-    copyFiles: [
-      {
-        from: "packages/infra/certs/af-south-1-bundle.pem",
-        to: "certs/af-south-1-bundle.pem",
-      },
-    ],
   });
 
   api.route("ANY /api/auth/{proxy+}", {
     handler: "apps/server/src/lambda/trpc/server.handler",
     timeout: "60 seconds",
     environment,
-    copyFiles: [
-      {
-        from: "packages/infra/certs/af-south-1-bundle.pem",
-        to: "certs/af-south-1-bundle.pem",
-      },
-    ],
   });
 
   api.route("ANY /", {
     handler: "apps/server/src/lambda/trpc/server.handler",
     timeout: "60 seconds",
     environment,
-    copyFiles: [
-      {
-        from: "packages/infra/certs/af-south-1-bundle.pem",
-        to: "certs/af-south-1-bundle.pem",
-      },
-    ],
   });
 
   return api;
