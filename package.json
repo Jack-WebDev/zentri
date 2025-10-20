@@ -23,9 +23,10 @@
     "dev:server": "turbo -F server dev",
     "dev:web": "turbo -F web dev",
     "prepare": "husky",
+    "sst:bootstrap": "AWS_PROFILE=zentri-prod sst bootstrap --stage prod --print-logs",
     "refresh": "AWS_PROFILE=zentri-prod sst refresh --stage prod --print-logs",
     "deploy": "AWS_PROFILE=zentri-prod sst deploy --stage prod --print-logs",
-    "remove:prod": "AWS_PROFILE=zentri-prod SST_STAGE=prod sst remove --print-logs"
+    "undeploy": "AWS_PROFILE=zentri-prod SST_STAGE=prod sst remove --print-logs"
   },
   "dependencies": {
     "sst": "3.17.14"
