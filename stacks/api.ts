@@ -32,7 +32,7 @@ export function Api({
 
   const api = new sst.aws.ApiGatewayV2("Api", {
     cors: {
-      allowOrigins: ["https://d28o0pvx2zsvzm.cloudfront.net"],
+      allowOrigins: ["https://d1dzfk340t5fcj.cloudfront.net"],
       allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
       allowHeaders: ["content-type", "authorization"],
       allowCredentials: true,
