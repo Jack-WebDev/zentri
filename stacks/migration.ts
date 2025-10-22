@@ -31,10 +31,22 @@ export function Migration({
     handler: "apps/server/src/lambda/db/migrate.handler",
     nodejs: {
       install: ["pg", "drizzle-orm"],
+      
     },
+      copyFiles: [
+    { from: "packages/db/migrations", to: "drizzle" }, 
+  ],
+
     link: [db.Database],
     environment,
   });
+
+ new aws.lambda.Invocation("DbMigrateRun", {
+    functionName: migrate.name,               
+    qualifier: "$LATEST",
+    input: JSON.stringify({ mode: "MIGRATE" }) 
+  });
+
 
   return { migrate };
 }
