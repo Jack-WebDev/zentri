@@ -9,6 +9,10 @@ declare module "sst" {
       "type": "sst.aws.ApiGatewayV2"
       "url": string
     }
+    "Auth": {
+      "type": "sst.sst.Secret"
+      "value": string
+    }
     "Bucket": {
       "name": string
       "type": "sst.aws.Bucket"

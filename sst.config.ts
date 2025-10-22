@@ -21,13 +21,13 @@ export default $config({
 		const { Database } = await import("./stacks/database");
 		const { Api } = await import("./stacks/api");
 		const { Web } = await import("./stacks/web");
-		// const { Authentication } = await import("./stacks/auth");
+		const { Authentication } = await import("./stacks/auth");
 		const { Migration } = await import("./stacks/migration");
 		const network = Network();
 		const bucket = Storage();
 		const db = Database({ network });
 		Migration({ bucket, db });
-		// Authentication();
+		Authentication();
 		const api = Api({ bucket, db });
 		Web({ api });
 	},
