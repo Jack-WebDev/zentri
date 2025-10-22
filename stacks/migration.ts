@@ -34,7 +34,7 @@ export function Migration({
       
     },
       copyFiles: [
-    { from: "packages/db/migrations", to: "drizzle" }, 
+    { from: "packages/db/src/db/migrations", to: "drizzle" }, 
   ],
 
     link: [db.Database],
