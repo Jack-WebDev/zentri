@@ -4,8 +4,8 @@ import { Resource } from "sst";
 const url = Resource.Database.url;
 
 export const db = drizzle({
-	connection: {
-		connectionString: url,
-		ssl: { rejectUnauthorized: false },
-	},
+  connection: {
+    connectionString: url,
+    ssl: { rejectUnauthorized: false },
+  },
 });

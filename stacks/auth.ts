@@ -1,3 +1,3 @@
 export function Authentication() {
-	return new sst.Secret("Auth");
+  return new sst.Secret("Auth");
 }

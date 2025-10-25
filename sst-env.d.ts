@@ -5,45 +5,44 @@
 
 declare module "sst" {
   export interface Resource {
-    "Api": {
-      "type": "sst.aws.ApiGatewayV2"
-      "url": string
-    }
-    "Auth": {
-      "type": "sst.sst.Secret"
-      "value": string
-    }
-    "Bucket": {
-      "name": string
-      "type": "sst.aws.Bucket"
-    }
-    "Database": {
-      "host": string
-      "name": string
-      "port": number
-      "type": "sst.sst.Linkable"
-      "url": string
-    }
-    "DbMigrate": {
-      "name": string
-      "type": "sst.aws.Function"
-    }
-    "Network": {
-      "publicSubnetIds": any
-      "securityGroupId": string
-      "type": "sst.sst.Linkable"
-      "vpcId": string
-    }
-    "Vpc": {
-      "type": "sst.aws.Vpc"
-    }
-    "Web": {
-      "type": "sst.aws.Nextjs"
-      "url": string
-    }
+    Api: {
+      type: "sst.aws.ApiGatewayV2";
+      url: string;
+    };
+    Auth: {
+      type: "sst.sst.Secret";
+      value: string;
+    };
+    Bucket: {
+      name: string;
+      type: "sst.aws.Bucket";
+    };
+    Database: {
+      host: string;
+      name: string;
+      port: number;
+      type: "sst.sst.Linkable";
+      url: string;
+    };
+    DbMigrate: {
+      name: string;
+      type: "sst.aws.Function";
+    };
+    Network: {
+      publicSubnetIds: any;
+      securityGroupId: string;
+      type: "sst.sst.Linkable";
+      vpcId: string;
+    };
+    Vpc: {
+      type: "sst.aws.Vpc";
+    };
+    Web: {
+      type: "sst.aws.Nextjs";
+      url: string;
+    };
   }
 }
 /// <reference path="sst-env.d.ts" />
 
-import "sst"
-export {}
+import "sst";

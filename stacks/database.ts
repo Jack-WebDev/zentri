@@ -103,9 +103,9 @@ export function Database(props: { network: NetworkReturn }) {
         "password": "${pwd.result}",
         "dbname": "${$app.stage}",
     	"url": "postgresql://${username}:${pwd.result}@${instance.address}:5432/${$app.stage}?sslmode=disable"
-      }`
+      }`,
       ),
-    }
+    },
   );
 
   const Database = new sst.Linkable("Database", {
