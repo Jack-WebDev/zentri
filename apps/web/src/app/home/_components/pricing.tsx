@@ -39,19 +39,18 @@ export default function Pricing() {
       <div className="mt-10 grid gap-6 md:grid-cols-3">
         <Tier
           name="Starter"
-          price="$0"
+          price="R0"
           blurb="Capture ideas and tasks with essentials"
           cta="Get started"
           perks={[
             "Unlimited notes & tasks",
             "Brain Map (basic)",
             "Mobile quick capture",
-            "Light/Dark themes",
           ]}
         />
         <Tier
           name="Pro"
-          price="$8/mo"
+          price="R100/mo"
           blurb="Deep focus and automation for power users"
           cta="Try Pro"
           popular
@@ -65,7 +64,7 @@ export default function Pricing() {
         />
         <Tier
           name="Teams"
-          price="$12/user"
+          price="R50/user"
           blurb="Collaborative stacks & shared graphs"
           cta="Contact sales"
           perks={[

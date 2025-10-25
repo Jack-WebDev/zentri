@@ -28,7 +28,7 @@ export default function Hero() {
       <GradientBlob className="top-[20%] right-[-10%] h-[26rem] w-[26rem]" />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid items-center gap-10 py-12 md:grid-cols-2 md:py-20">
+        <div className="grid items-center gap-10 py-12 md:py-20 lg:grid-cols-2">
           <div>
             <h1 className="font-semibold text-4xl tracking-tight sm:text-5xl">
               <span className="bg-gradient-to-r from-cyan-600 via-teal-500 to-amber-500 bg-clip-text text-transparent">

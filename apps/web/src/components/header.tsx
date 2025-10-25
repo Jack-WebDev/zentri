@@ -103,7 +103,7 @@ export default function Header() {
 
               <div className="mt-3 flex flex-col gap-2 px-2">
                 <Button
-                  className="w-full bg-emerald-500 text-white hover:bg-emerald-400 dark:text-slate-900"
+                  className="w-full bg-gradient-to-r from-cyan-500 to-teal-500 text-white"
                   onClick={() => setOpen(false)}
                 >
                   Get started
@@ -121,7 +121,6 @@ export default function Header() {
         </nav>
       </header>
 
-      {/* Spacer to avoid content underlap */}
       <div aria-hidden className="h-16 sm:h-16" />
 
       <style jsx>{`

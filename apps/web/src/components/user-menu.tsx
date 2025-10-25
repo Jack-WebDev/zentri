@@ -31,7 +31,7 @@ export default function UserMenu() {
         </Button>
 
         <Button
-          className="group bg-gradient-to-r from-cyan-500 to-teal-500 text-white hover:opacity-90"
+          className="group hidden bg-gradient-to-r from-cyan-500 to-teal-500 text-white hover:opacity-90 sm:inline-flex"
           asChild
         >
           <Link href="/login">
