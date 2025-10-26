@@ -1,14 +1,7 @@
 /** biome-ignore-all lint/correctness/useUniqueElementIds: // biome-ignore lint: false positive */
 "use client";
 
-import {
-  InfinityIcon,
-  Link2,
-  PlayCircle,
-  Search,
-  Tag,
-  TimerReset,
-} from "lucide-react";
+import { InfinityIcon, Link2, Search, Tag, TimerReset } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -44,13 +37,6 @@ export default function Hero() {
             <div className="mt-6 flex w-full flex-col gap-3 sm:flex-row">
               <Button className="group w-full bg-gradient-to-r from-cyan-500 to-teal-500 text-white hover:opacity-90 sm:w-auto">
                 Start free
-              </Button>
-              <Button
-                variant="outline"
-                className="w-full border-cyan-200 sm:w-auto dark:border-teal-800"
-              >
-                Watch demo
-                <PlayCircle className="ml-2 h-4 w-4" />
               </Button>
             </div>
             <div className="mt-6 flex flex-wrap items-center gap-4 text-muted-foreground text-xs">

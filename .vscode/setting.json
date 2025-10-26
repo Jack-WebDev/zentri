@@ -1,8 +1,8 @@
 {
   "cSpell.words": ["kebabcase"],
   "editor.codeActionsOnSave": {
-    "source.organizeImports": "explicit",
-    "source.removeUnused.ts": "explicit"
+    "source.organizeImports": true,
+    "source.removeUnused.ts": true
   },
   "postman.settings.dotenv-detection-notification-visibility": false
 }
