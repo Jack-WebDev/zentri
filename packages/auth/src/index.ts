@@ -11,7 +11,15 @@ export const auth = betterAuth<BetterAuthOptions>({
   trustedOrigins: [process.env.CORS_ORIGIN || ""],
   emailAndPassword: {
     enabled: true,
+    // sendResetPassword: async ({ user, url, token }, request) => {
+    //   await sendEmail({
+    //     to: user.email,
+    //     subject: "Reset your password",
+    //     text: `Click the link to reset your password: ${url}`,
+    //   });
+    // },
   },
+
   advanced: {
     defaultCookieAttributes: {
       sameSite: "none",
