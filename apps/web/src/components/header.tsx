@@ -2,10 +2,10 @@
 
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ModeToggle } from "./mode-toggle";
-import { Button } from "./ui/button";
 import UserMenu from "./user-menu";
 
 const LINKS = [
@@ -102,19 +102,18 @@ export default function Header() {
               ))}
 
               <div className="mt-3 flex flex-col gap-2 px-2">
-                <Button
+                <Link
                   className="w-full bg-gradient-to-r from-cyan-500 to-teal-500 text-white"
-                  onClick={() => setOpen(false)}
+                  href="/auth/register"
                 >
                   Get started
-                </Button>
-                <Button
-                  variant="ghost"
+                </Link>
+                <Link
                   className="w-full text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
-                  onClick={() => setOpen(false)}
+                  href="/auth/login"
                 >
                   Log in
-                </Button>
+                </Link>
               </div>
             </div>
           </div>
