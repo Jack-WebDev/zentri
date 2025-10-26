@@ -2,6 +2,7 @@
 
 import { useForm } from "@tanstack/react-form";
 import { Eye, EyeOff, Lock, Mail, User as UserIcon } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -20,11 +21,7 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Separator } from "./ui/separator";
 
-export default function SignUpForm({
-  onSwitchToSignIn,
-}: {
-  onSwitchToSignIn: () => void;
-}) {
+export default function SignUpForm() {
   const router = useRouter();
   const { isPending } = authClient.useSession();
   const [showPassword, setShowPassword] = useState(false);
@@ -65,7 +62,7 @@ export default function SignUpForm({
   if (isPending) return <Loader />;
 
   return (
-    <div className="relative grid min-h-screen place-items-center overflow-hidden px-4 py-10 lg:min-h-auto">
+    <div className="relative grid min-h-screen place-items-center overflow-hidden px-4 py-10 lg:min-h-full">
       <Card className="w-full max-w-xl rounded-2xl border border-white/10 bg-background/60 shadow-[0_12px_40px_-10px_rgba(0,0,0,0.6)] backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
         <CardHeader className="space-y-2">
           <CardTitle className="text-center font-bold text-3xl tracking-tight">
@@ -249,14 +246,9 @@ export default function SignUpForm({
 
             <div className="text-center text-muted-foreground text-sm">
               Already have an account?{" "}
-              <Button
-                type="button"
-                variant="link"
-                onClick={onSwitchToSignIn}
-                className="px-1"
-              >
+              <Link href={"/auth/login"} className="px-1">
                 Login
-              </Button>
+              </Link>
             </div>
           </form>
         </CardContent>
