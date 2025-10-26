@@ -27,14 +27,14 @@ export default function UserMenu() {
     return (
       <div className="flex items-center gap-2">
         <Button variant="ghost" className="hidden sm:inline-flex" asChild>
-          <Link href="/login">Log in</Link>
+          <Link href="/auth/login">Log in</Link>
         </Button>
 
         <Button
           className="group hidden bg-gradient-to-r from-cyan-500 to-teal-500 text-white hover:opacity-90 sm:inline-flex"
           asChild
         >
-          <Link href="/login">
+          <Link href="/auth/register">
             <span className="inline-flex items-center">
               Get started
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />

@@ -2,6 +2,7 @@
 
 import { useForm } from "@tanstack/react-form";
 import { Eye, EyeOff, Lock, Mail } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -20,11 +21,7 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Separator } from "./ui/separator";
 
-export default function SignInForm({
-  onSwitchToSignUp,
-}: {
-  onSwitchToSignUp: () => void;
-}) {
+export default function SignInForm() {
   const router = useRouter();
   const { isPending } = authClient.useSession();
   const [showPassword, setShowPassword] = useState(false);
@@ -64,7 +61,7 @@ export default function SignInForm({
   }
 
   return (
-    <div className="relative mx-auto grid min-h-[100vh] w-full place-items-center overflow-hidden px-4 py-10 lg:min-h-auto">
+    <div className="relative mx-auto grid min-h-[100vh] w-full place-items-center overflow-hidden px-4 py-10 lg:min-h-full">
       <div aria-hidden className="-z-10 pointer-events-none absolute inset-0">
         <div className="absolute top-[-10%] left-[-10%] h-80 w-80 rounded-full bg-gradient-to-tr from-indigo-500/25 via-purple-500/25 to-pink-500/25 blur-3xl" />
         <div className="absolute right-[-10%] bottom-[-10%] h-80 w-80 rounded-full bg-gradient-to-br from-emerald-400/20 via-cyan-400/20 to-blue-500/20 blur-3xl" />
@@ -194,7 +191,7 @@ export default function SignInForm({
               <div className="text-muted-foreground text-sm">
                 <span>Forgot your password?</span>{" "}
                 <a
-                  href="/reset-password"
+                  href="/auth/forgot-password"
                   className="font-medium text-primary underline-offset-4 hover:underline"
                 >
                   Reset it
@@ -221,14 +218,9 @@ export default function SignInForm({
 
             <div className="text-center text-muted-foreground text-sm">
               Need an account?{" "}
-              <Button
-                type="button"
-                variant="link"
-                onClick={onSwitchToSignUp}
-                className="px-1"
-              >
+              <Link href="/auth/register" className="px-1">
                 Create one
-              </Button>
+              </Link>
             </div>
           </form>
         </CardContent>
