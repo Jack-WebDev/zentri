@@ -2,6 +2,7 @@
 
 import { useForm } from "@tanstack/react-form";
 import { Mail } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -27,7 +28,7 @@ export default function ForgotPasswordForm() {
       email: "",
     },
     onSubmit: async ({ value }) => {
-      await authClient.forgetPassword(
+      await authClient.requestPasswordReset(
         { email: value.email },
         {
           onSuccess: () => {
@@ -131,12 +132,12 @@ export default function ForgotPasswordForm() {
 
             <p className="text-center text-muted-foreground text-sm">
               Remembered your password?{" "}
-              <a
-                href="/login"
+              <Link
+                href="/auth/login"
                 className="font-medium text-primary underline-offset-4 hover:underline"
               >
-                Go back to sign in
-              </a>
+                Go back to login
+              </Link>
             </p>
           </form>
         </CardContent>

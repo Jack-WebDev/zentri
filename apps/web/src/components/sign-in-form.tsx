@@ -62,11 +62,6 @@ export default function SignInForm() {
 
   return (
     <div className="relative mx-auto grid min-h-[100vh] w-full place-items-center overflow-hidden px-4 py-10 lg:min-h-full">
-      <div aria-hidden className="-z-10 pointer-events-none absolute inset-0">
-        <div className="absolute top-[-10%] left-[-10%] h-80 w-80 rounded-full bg-gradient-to-tr from-indigo-500/25 via-purple-500/25 to-pink-500/25 blur-3xl" />
-        <div className="absolute right-[-10%] bottom-[-10%] h-80 w-80 rounded-full bg-gradient-to-br from-emerald-400/20 via-cyan-400/20 to-blue-500/20 blur-3xl" />
-      </div>
-
       <Card className="w-full max-w-xl border border-border/60 shadow-lg backdrop-blur supports-[backdrop-filter]:bg-background/80">
         <CardHeader className="space-y-2">
           <CardTitle className="text-center font-bold text-3xl tracking-tight">
@@ -190,12 +185,12 @@ export default function SignInForm() {
             <div className="flex items-center justify-between">
               <div className="text-muted-foreground text-sm">
                 <span>Forgot your password?</span>{" "}
-                <a
+                <Link
                   href="/auth/forgot-password"
                   className="font-medium text-primary underline-offset-4 hover:underline"
                 >
                   Reset it
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -218,7 +213,10 @@ export default function SignInForm() {
 
             <div className="text-center text-muted-foreground text-sm">
               Need an account?{" "}
-              <Link href="/auth/register" className="px-1">
+              <Link
+                href="/auth/register"
+                className="px-2 font-medium text-primary underline-offset-4 hover:underline"
+              >
                 Create one
               </Link>
             </div>
