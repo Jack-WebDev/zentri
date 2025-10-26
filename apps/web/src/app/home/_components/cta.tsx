@@ -1,7 +1,6 @@
 "use client";
 
-import { ArrowRight, Quote } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Quote } from "lucide-react";
 
 export default function CTA() {
   return (
@@ -16,18 +15,6 @@ export default function CTA() {
               Start capturing seeds, grow ideas, and watch your thinking garden
               bloom.
             </p>
-            <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-              <Button className="group w-full bg-gradient-to-r from-cyan-500 to-teal-500 text-white hover:opacity-90 sm:w-auto">
-                Create your workspace
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </Button>
-              <Button
-                variant="outline"
-                className="w-full border-cyan-200 sm:w-auto dark:border-teal-800"
-              >
-                Import from Notion
-              </Button>
-            </div>
           </div>
           <div className="rounded-2xl border bg-background/80 p-4">
             <div className="flex items-center gap-2 text-muted-foreground text-xs">
