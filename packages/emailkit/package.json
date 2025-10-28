@@ -1,0 +1,24 @@
+{
+  "name": "@zentri/emailkit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.15.1",
+  "dependencies": {
+    "@react-email/components": "^0.5.7",
+    "nodemailer": "^7.0.10",
+    "react": "19.1.0"
+  },
+  "devDependencies": {
+    "@types/nodemailer": "^7.0.3",
+    "@types/react": "~19.1.17",
+    "@types/react-dom": "^19.2.0",
+    "tsdown": "^0.15.10"
+  }
+}
