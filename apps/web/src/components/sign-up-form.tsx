@@ -246,7 +246,10 @@ export default function SignUpForm() {
 
             <div className="text-center text-muted-foreground text-sm">
               Already have an account?{" "}
-              <Link href={"/auth/login"} className="px-1">
+              <Link
+                href={"/auth/login"}
+                className="px-1 font-medium text-primary underline-offset-4 hover:underline"
+              >
                 Login
               </Link>
             </div>
