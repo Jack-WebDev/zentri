@@ -56,25 +56,43 @@ export function Api({
     },
   });
 
-  api.route("ANY /trpc", {
+  // tRPC root
+  api.route("GET /trpc", {
+    handler: "apps/server/src/lambda/trpc/server.handler",
+    timeout: "60 seconds",
+    environment,
+  });
+  api.route("POST /trpc", {
     handler: "apps/server/src/lambda/trpc/server.handler",
     timeout: "60 seconds",
     environment,
   });
 
-  api.route("ANY /trpc/{proxy+}", {
+  // tRPC proxy
+  api.route("GET /trpc/{proxy+}", {
+    handler: "apps/server/src/lambda/trpc/server.handler",
+    timeout: "60 seconds",
+    environment,
+  });
+  api.route("POST /trpc/{proxy+}", {
     handler: "apps/server/src/lambda/trpc/server.handler",
     timeout: "60 seconds",
     environment,
   });
 
-  api.route("ANY /api/auth/{proxy+}", {
+  api.route("GET /api/auth/{proxy+}", {
+    handler: "apps/server/src/lambda/trpc/server.handler",
+    timeout: "60 seconds",
+    environment,
+  });
+  api.route("POST /api/auth/{proxy+}", {
     handler: "apps/server/src/lambda/trpc/server.handler",
     timeout: "60 seconds",
     environment,
   });
 
-  api.route("ANY /", {
+  // Health/root
+  api.route("GET /", {
     handler: "apps/server/src/lambda/trpc/server.handler",
     timeout: "60 seconds",
     environment,
