@@ -9,6 +9,7 @@ import {
   Section,
   Text,
 } from "@react-email/components";
+import type { JSX } from "react";
 
 interface ForgotPasswordEmailProps {
   userFirstname?: string;
@@ -19,10 +20,10 @@ const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "";
 
-export const ForgotPasswordEmail = ({
+export default function ForgotPasswordEmail({
   userFirstname,
   resetPasswordLink,
-}: ForgotPasswordEmailProps) => {
+}: ForgotPasswordEmailProps): JSX.Element {
   return (
     <Html>
       <Head />
@@ -60,26 +61,19 @@ export const ForgotPasswordEmail = ({
       </Body>
     </Html>
   );
-};
+}
 
 ForgotPasswordEmail.PreviewProps = {
   userFirstname: "Alan",
   resetPasswordLink: "https://www.dropbox.com",
-} as ForgotPasswordEmailProps;
+} satisfies ForgotPasswordEmailProps;
 
-export default ForgotPasswordEmail;
-
-const main = {
-  backgroundColor: "#f6f9fc",
-  padding: "10px 0",
-};
-
+const main = { backgroundColor: "#f6f9fc", padding: "10px 0" } as const;
 const container = {
   backgroundColor: "#ffffff",
   border: "1px solid #f0f0f0",
   padding: "45px",
-};
-
+} as const;
 const text = {
   fontSize: "16px",
   fontFamily:
@@ -87,8 +81,7 @@ const text = {
   fontWeight: "300",
   color: "#404040",
   lineHeight: "26px",
-};
-
+} as const;
 const button = {
   backgroundColor: "#007ee6",
   borderRadius: "4px",
@@ -100,8 +93,5 @@ const button = {
   display: "block",
   width: "210px",
   padding: "14px 7px",
-};
-
-const anchor = {
-  textDecoration: "underline",
-};
+} as const;
+const anchor = { textDecoration: "underline" } as const;

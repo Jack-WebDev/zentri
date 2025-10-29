@@ -1,2 +1,2 @@
-export * from "./ForgotPassword";
-export * from "./VerifyEmail";
+export { default as ForgotPasswordEmail } from "./ForgotPassword";
+export { default as VerifyEmail } from "./VerifyEmail";
