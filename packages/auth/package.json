@@ -16,7 +16,10 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "@react-email/render": "^1.4.0",
+    "@zentri/db": "workspace:*",
+    "@zentri/emailkit": "workspace:*",
     "better-auth": "^1.3.18",
-    "@zentri/db": "workspace:*"
+    "react": "19.1.0"
   }
 }

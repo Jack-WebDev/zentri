@@ -2,6 +2,7 @@ import { db } from "@zentri/db";
 import * as schema from "@zentri/db/schema/auth";
 import { type BetterAuthOptions, betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { sendPasswordResetEmail } from "./utils/email";
 
 export const auth = betterAuth<BetterAuthOptions>({
   database: drizzleAdapter(db, {
@@ -11,13 +12,11 @@ export const auth = betterAuth<BetterAuthOptions>({
   trustedOrigins: [process.env.CORS_ORIGIN || ""],
   emailAndPassword: {
     enabled: true,
-    // sendResetPassword: async ({ user, url, token }, request) => {
-    //   await sendEmail({
-    //     to: user.email,
-    //     subject: "Reset your password",
-    //     text: `Click the link to reset your password: ${url}`,
-    //   });
-    // },
+    sendResetPassword: async ({ user }) => {
+      await sendPasswordResetEmail({
+        to: user.email,
+      });
+    },
   },
 
   advanced: {

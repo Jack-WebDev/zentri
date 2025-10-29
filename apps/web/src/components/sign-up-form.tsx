@@ -248,7 +248,7 @@ export default function SignUpForm() {
               Already have an account?{" "}
               <Link
                 href={"/auth/login"}
-                className="px-2 font-medium text-primary underline-offset-4 hover:underline"
+                className="px-1 font-medium text-primary underline-offset-4 hover:underline"
               >
                 Login
               </Link>

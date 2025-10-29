@@ -10,6 +10,7 @@ import {
   Section,
   Text,
 } from "@react-email/components";
+import type { JSX } from "react";
 
 interface VerifyEmailProps {
   verificationCode?: string;
@@ -19,7 +20,9 @@ const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "";
 
-export default function VerifyEmail({ verificationCode }: VerifyEmailProps) {
+export default function VerifyEmail({
+  verificationCode,
+}: VerifyEmailProps): JSX.Element {
   return (
     <Html>
       <Head />
@@ -44,7 +47,6 @@ export default function VerifyEmail({ verificationCode }: VerifyEmailProps) {
               </Text>
               <Section style={verificationSection}>
                 <Text style={verifyText}>Verification code</Text>
-
                 <Text style={codeText}>{verificationCode}</Text>
                 <Text style={validityText}>
                   (This code is valid for 10 minutes)
@@ -83,17 +85,12 @@ VerifyEmail.PreviewProps = {
   verificationCode: "596853",
 } satisfies VerifyEmailProps;
 
-const main = {
-  backgroundColor: "#fff",
-  color: "#212121",
-};
-
+const main = { backgroundColor: "#fff", color: "#212121" };
 const container = {
   padding: "20px",
   margin: "0 auto",
   backgroundColor: "#eee",
 };
-
 const h1 = {
   color: "#333",
   fontFamily:
@@ -102,7 +99,6 @@ const h1 = {
   fontWeight: "bold",
   marginBottom: "15px",
 };
-
 const link = {
   color: "#2754C5",
   fontFamily:
@@ -110,7 +106,6 @@ const link = {
   fontSize: "14px",
   textDecoration: "underline",
 };
-
 const text = {
   color: "#333",
   fontFamily:
@@ -118,7 +113,6 @@ const text = {
   fontSize: "14px",
   margin: "24px 0",
 };
-
 const imageSection = {
   backgroundColor: "#252f3d",
   display: "flex",
@@ -126,26 +120,16 @@ const imageSection = {
   alignItems: "center",
   justifyContent: "center",
 };
-
 const coverSection = { backgroundColor: "#fff" };
-
 const upperSection = { padding: "25px 35px" };
-
 const lowerSection = { padding: "25px 35px" };
-
-const footerText = {
-  ...text,
-  fontSize: "12px",
-  padding: "0 20px",
-};
-
+const footerText = { ...text, fontSize: "12px", padding: "0 20px" };
 const verifyText = {
   ...text,
   margin: 0,
   fontWeight: "bold",
   textAlign: "center" as const,
 };
-
 const codeText = {
   ...text,
   fontWeight: "bold",
@@ -153,19 +137,11 @@ const codeText = {
   margin: "10px 0",
   textAlign: "center" as const,
 };
-
-const validityText = {
-  ...text,
-  margin: "0px",
-  textAlign: "center" as const,
-};
-
+const validityText = { ...text, margin: "0px", textAlign: "center" as const };
 const verificationSection = {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
 };
-
 const mainText = { ...text, marginBottom: "14px" };
-
 const cautionText = { ...text, margin: "0px" };

@@ -215,7 +215,7 @@ export default function SignInForm() {
               Need an account?{" "}
               <Link
                 href="/auth/register"
-                className="px-2 font-medium text-primary underline-offset-4 hover:underline"
+                className="px-1 font-medium text-primary underline-offset-4 hover:underline"
               >
                 Create one
               </Link>
