@@ -14,6 +14,12 @@ export function Migration({
   const auth = getSecretValues("zentri/prod/auth", [
     "BETTER_AUTH_SECRET",
     "CORS_ORIGIN",
+    "MAIL_FROM_EMAIL",
+    "MAIL_PASSWORD",
+    "MAIL_PORT",
+    "MAIL_HOST",
+    "MAIL_USER",
+    "MAIL_SECURE",
   ] as const);
 
   const environment: Record<string, pulumi.Input<string>> = {
@@ -25,6 +31,12 @@ export function Migration({
     SERVER_PORT: "8080",
     BETTER_AUTH_SECRET: auth.BETTER_AUTH_SECRET,
     CORS_ORIGIN: auth.CORS_ORIGIN,
+    MAIL_FROM_EMAIL: auth.MAIL_FROM_EMAIL,
+    MAIL_PASSWORD: auth.MAIL_PASSWORD,
+    MAIL_PORT: auth.MAIL_PORT,
+    MAIL_HOST: auth.MAIL_HOST,
+    MAIL_USER: auth.MAIL_USER,
+    MAIL_SECURE: auth.MAIL_SECURE,
   };
 
   const migrate = new sst.aws.Function("DbMigrate", {
