@@ -71,7 +71,8 @@ jobs:
           )
 
       - name: Validate Drizzle migrations
-        run: pnpm dlx drizzle-kit check
+        working-directory: packages/db
+        run: pnpm drizzle-kit check
 
       - name: Build
         run: pnpm build

@@ -368,7 +368,7 @@ importers:
   packages/db:
     dependencies:
       drizzle-orm:
-        specifier: ^0.44.5
+        specifier: ^0.44.7
         version: 0.44.7(@opentelemetry/api@1.9.0)(@types/pg@8.15.6)(kysely@0.28.8)(pg@8.16.3)
       pg:
         specifier: ^8.16.3
