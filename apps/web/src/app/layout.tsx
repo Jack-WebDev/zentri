@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Lato } from "next/font/google";
 import "../index.css";
-import Footer from "@/components/footer";
-import Header from "@/components/header";
 import Providers from "@/components/providers";
 
 const lato = Lato({
@@ -30,9 +28,7 @@ export default function RootLayout({
       <body className={`${lato.variable} antialiased`}>
         <Providers>
           <div className="grid min-h-svh grid-rows-[auto_1fr_auto]">
-            <Header />
             {children}
-            <Footer />
           </div>
         </Providers>
       </body>
