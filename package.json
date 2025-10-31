@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "build": "turbo build",
+    "clean": "turbo clean",
     "check": "biome check --write .",
     "check-types": "turbo check-types",
     "db:down": "turbo -F server db:down",

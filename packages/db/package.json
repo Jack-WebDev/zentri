@@ -6,6 +6,7 @@
   },
   "scripts": {
     "build": "tsdown",
+    "clean": "rimraf dist .turbo",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
     "db:generate": "drizzle-kit generate",
@@ -15,6 +16,7 @@
     "@types/node": "^24.5.2",
     "@types/pg": "^8.15.5",
     "drizzle-kit": "^0.31.5",
+    "rimraf": "^6.1.0",
     "tsdown": "^0.15.5"
   },
   "peerDependencies": {
