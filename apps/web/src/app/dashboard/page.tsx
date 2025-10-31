@@ -1,24 +1,21 @@
-import { headers } from "next/headers";
-import { redirect } from "next/navigation";
-import { authClient } from "@/lib/auth-client";
-import Dashboard from "./dashboard";
+import { AppSidebar } from "@/components/app-sidebar";
+import { SiteHeader } from "@/components/site-header";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
-export default async function DashboardPage() {
-  const session = await authClient.getSession({
-    fetchOptions: {
-      headers: await headers(),
-    },
-  });
-
-  if (!session.data) {
-    redirect("/login");
-  }
-
+export default function DashboardPage() {
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <p>Welcome {session.data.user.name}</p>
-      <Dashboard />
-    </div>
+    <SidebarProvider
+      style={
+        {
+          "--sidebar-width": "calc(var(--spacing) * 72)",
+          "--header-height": "calc(var(--spacing) * 12)",
+        } as React.CSSProperties
+      }
+    >
+      <AppSidebar variant="inset" />
+      <SidebarInset>
+        <SiteHeader />
+      </SidebarInset>
+    </SidebarProvider>
   );
 }
