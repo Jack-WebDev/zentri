@@ -1,13 +1,9 @@
 /** biome-ignore-all lint/correctness/useUniqueElementIds: // biome-ignore lint: false positive */
-/** biome-ignore-all lint/a11y/noSvgWithoutTitle: // biome-ignore lint: false positive */
 
 export default function BrainMap() {
   return (
-    <svg
-      viewBox="0 0 600 320"
-      className="h-[260px] w-full md:h-[320px]"
-      aria-hidden
-    >
+    <svg viewBox="0 0 600 320" className="h-[260px] w-full md:h-80" aria-hidden>
+      <title id="brainMapTitle">Brain map</title>
       <defs>
         <radialGradient id="g1" cx="50%" cy="50%" r="60%">
           <stop offset="0%" stopColor="currentColor" stopOpacity="0.5" />

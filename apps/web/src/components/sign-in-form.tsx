@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import z from "zod";
 import { authClient } from "@/lib/auth-client";
 import Loader from "./loader";
+import SocialButtons from "./socialButtons";
 import { Button } from "./ui/button";
 import {
   Card,
@@ -17,9 +18,9 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
+import { FieldSeparator } from "./ui/field";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
-import { Separator } from "./ui/separator";
 
 export default function SignInForm() {
   const router = useRouter();
@@ -61,8 +62,8 @@ export default function SignInForm() {
   }
 
   return (
-    <div className="relative mx-auto grid min-h-[100vh] w-full place-items-center overflow-hidden px-4 py-10 lg:min-h-full">
-      <Card className="w-full max-w-xl border border-border/60 shadow-lg backdrop-blur supports-[backdrop-filter]:bg-background/80">
+    <div className="relative mx-auto grid min-h-screen w-full place-items-center overflow-hidden px-4 py-10 lg:min-h-full">
+      <Card className="w-full max-w-xl border border-border/60 shadow-lg backdrop-blur supports-backdrop-filter:bg-background/80">
         <CardHeader className="space-y-2">
           <CardTitle className="text-center font-bold text-3xl tracking-tight">
             Welcome back
@@ -209,7 +210,11 @@ export default function SignInForm() {
               )}
             </form.Subscribe>
 
-            <Separator className="my-2" />
+            <FieldSeparator className="my-4 *:data-[slot=field-separator-content]:bg-card">
+              Or continue with
+            </FieldSeparator>
+
+            <SocialButtons />
 
             <div className="text-center text-muted-foreground text-sm">
               Need an account?{" "}

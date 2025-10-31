@@ -1,4 +1,4 @@
-import { auth } from "@zentri/auth";
+import { auth } from "@zentri/auth/server";
 import type { DB } from "@zentri/db";
 import { db } from "@zentri/db";
 import type { Context as HonoContext } from "hono";
