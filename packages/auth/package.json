@@ -19,7 +19,8 @@
   },
   "scripts": {
     "build": "tsdown",
-    "clean": "rimraf dist .turbo"
+    "clean": "rimraf dist .turbo",
+    "lint": "biome check --write ."
   },
   "devDependencies": {
     "@types/node": "^24.5.2",

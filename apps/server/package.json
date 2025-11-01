@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "tsdown",
+    "lint": "biome check --write .",
     "check-types": "tsc -b",
     "test": "vitest run",
     "test:watch": "vitest",

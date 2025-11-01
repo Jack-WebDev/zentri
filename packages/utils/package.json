@@ -1,27 +1,26 @@
 {
-  "name": "@zentri/schema",
+  "name": "@zentri/utils",
   "version": "1.0.0",
   "private": true,
-  "description": "Zentri schema",
-  "exports": {
-    ".": "./dist/index.js",
-    "./*": "./dist/*.js"
-  },
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "build": "tsdown",
     "clean": "rimraf dist .turbo",
+    "test": "vitest run",
     "lint": "biome check --write ."
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.15.1",
-  "devDependencies": {
-    "@types/node": "^24.9.2",
-    "rimraf": "^6.1.0",
-    "tsdown": "^0.15.12"
-  },
   "dependencies": {
-    "zod": "^4.1.12"
+    "lodash": "4.17.21"
+  },
+  "devDependencies": {
+    "@types/lodash": "4.17.20",
+    "@zentri/testkit": "workspace:*",
+    "tsdown": "0.15.5",
+    "vitest": "4.0.6"
   }
 }
