@@ -5,6 +5,8 @@
   "scripts": {
     "build": "tsdown",
     "check-types": "tsc -b",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "compile": "tsdown build --format esm --minify --sourcemap --outDir dist",
     "dev": "tsx watch src/index.ts",
     "clean": "rimraf dist .turbo",
@@ -34,12 +36,18 @@
     "zod": "^4.0.2"
   },
   "devDependencies": {
+    "@testcontainers/postgresql": "11.7.2",
     "@types/node": "^22.13.11",
     "@types/pg": "^8.15.5",
+    "@types/supertest": "6.0.3",
     "drizzle-kit": "^0.31.2",
     "rimraf": "^6.1.0",
+    "supertest": "7.1.4",
+    "testcontainers": "11.7.2",
     "tsdown": "^0.15.1",
     "tsx": "^4.19.2",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "vitest": "4.0.6",
+    "@zentri/testkit": "workspace:*"
   }
 }

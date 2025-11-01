@@ -1,0 +1,22 @@
+{
+  "name": "@zentri/testkit",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./vitest-config": "./vitest.config.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.15.1",
+  "devDependencies": {
+    "@testcontainers/postgresql": "11.7.2",
+    "@types/supertest": "6.0.3",
+    "supertest": "7.1.4",
+    "testcontainers": "11.7.2",
+    "vitest": "4.0.6"
+  }
+}
