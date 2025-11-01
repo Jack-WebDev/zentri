@@ -41,8 +41,9 @@ export default function SignUpForm() {
         },
         {
           onSuccess: () => {
-            router.push("/dashboard");
+            router.push("/home");
             toast.success("Account created. Welcome!");
+            router.refresh();
           },
           onError: (error) => {
             toast.error(error.error.message || error.error.statusText);
@@ -63,7 +64,7 @@ export default function SignUpForm() {
 
   return (
     <div className="relative grid min-h-screen place-items-center overflow-hidden px-4 py-10 lg:min-h-full">
-      <Card className="w-full max-w-xl rounded-2xl border border-white/10 bg-background/60 shadow-[0_12px_40px_-10px_rgba(0,0,0,0.6)] backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
+      <Card className="w-full max-w-xl rounded-2xl border border-white/10 bg-background/60 shadow-[0_12px_40px_-10px_rgba(0,0,0,0.6)] backdrop-blur-md supports-backdrop-filter:bg-background/60">
         <CardHeader className="space-y-2">
           <CardTitle className="text-center font-bold text-3xl tracking-tight">
             Create your account

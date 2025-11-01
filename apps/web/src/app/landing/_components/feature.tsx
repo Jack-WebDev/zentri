@@ -81,8 +81,8 @@ export default function Feature() {
 
 function FeatureCard({ icon, title, desc, tag }: FeatureCardProps) {
   return (
-    <Card className="group relative overflow-hidden border-muted/40 bg-card/80 backdrop-blur transition-all hover:shadow-lg supports-[backdrop-filter]:bg-card/60">
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-cyan-500/0 via-amber-400/0 to-teal-500/0 group-hover:from-cyan-500/5 group-hover:via-amber-400/5 group-hover:to-teal-500/5" />
+    <Card className="group relative overflow-hidden border-muted/40 bg-card/80 backdrop-blur transition-all hover:shadow-lg supports-backdrop-filter:bg-card/60">
+      <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-cyan-500/0 via-amber-400/0 to-teal-500/0 group-hover:from-cyan-500/5 group-hover:via-amber-400/5 group-hover:to-teal-500/5" />
       <CardHeader>
         <div className="flex items-center gap-3">
           <div className="rounded-2xl bg-primary/10 p-2.5 text-primary ring-1 ring-primary/20 group-hover:bg-primary/15">
