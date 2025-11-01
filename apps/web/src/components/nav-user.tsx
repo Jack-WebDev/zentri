@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  Bell,
-  CreditCard,
-  EllipsisVertical,
-  LogOut,
-  UserCircle,
-} from "lucide-react";
+import { CreditCard, EllipsisVertical, LogOut, UserCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -41,6 +35,25 @@ export function NavUser() {
   }
 
   const user = session.user;
+
+  const handleLogout = () => {
+    authClient.signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          router.push("/auth/login");
+          router.refresh();
+        },
+      },
+    });
+  };
+
+  const navigateToAccount = () => {
+    router.push("/my-account/profile");
+  };
+
+  const navigateToBilling = () => {
+    router.push("/my-account/billing");
+  };
 
   return (
     <SidebarMenu>
@@ -91,31 +104,17 @@ export function NavUser() {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={navigateToAccount}>
                 <UserCircle />
                 Account
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={navigateToBilling}>
                 <CreditCard />
                 Billing
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Bell />
-                Notifications
-              </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem
-              onClick={() => {
-                authClient.signOut({
-                  fetchOptions: {
-                    onSuccess: () => {
-                      router.push("/");
-                    },
-                  },
-                });
-              }}
-            >
+            <DropdownMenuItem onClick={handleLogout}>
               <LogOut />
               Log out
             </DropdownMenuItem>

@@ -18,7 +18,7 @@ export default function SocialButtons() {
             onClick={() =>
               authClient.signIn.social({
                 provider,
-                callbackURL: "http://localhost:3001/dashboard",
+                callbackURL: "http://localhost:3001/home",
               })
             }
           >

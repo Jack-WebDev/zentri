@@ -4,8 +4,8 @@
   "private": true,
   "description": "Zentri schema",
   "exports": {
-    ".": "./dist/index.js",
-    "./*": "./dist/*.js"
+    ".": "./dist/index.mjs",
+    "./*": "./dist/*.mjs"
   },
   "scripts": {
     "build": "tsdown",
