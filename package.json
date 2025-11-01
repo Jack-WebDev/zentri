@@ -10,6 +10,7 @@
     "build": "turbo build",
     "clean": "turbo clean",
     "lint": "biome check --write .",
+    "test": "turbo run test",
     "lint:ci": "biome ci --reporter=github",
     "check-types": "turbo check-types",
     "db:down": "turbo -F server db:down",

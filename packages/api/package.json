@@ -7,13 +7,16 @@
   "type": "module",
   "scripts": {
     "build": "tsdown",
-    "clean": "rimraf dist .turbo"
+    "clean": "rimraf dist .turbo",
+    "test": "vitest run"
   },
   "devDependencies": {
     "@types/node": "^24.6.2",
     "@types/pg": "^8.15.5",
+    "@zentri/testkit": "workspace:*",
     "rimraf": "^6.1.0",
-    "tsdown": "^0.15.5"
+    "tsdown": "^0.15.5",
+    "vitest": "4.0.6"
   },
   "peerDependencies": {
     "typescript": "^5"
