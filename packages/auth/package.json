@@ -1,0 +1,24 @@
+{
+  "name": "@zentri/auth",
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "scripts": {},
+  "dependencies": {
+    "@zentri/db": "workspace:*",
+    "@zentri/env": "workspace:*",
+    "better-auth": "catalog:",
+    "dotenv": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@zentri/config": "workspace:*",
+    "typescript": "catalog:"
+  }
+}

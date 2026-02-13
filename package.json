@@ -1,0 +1,47 @@
+{
+  "name": "zentri",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "type": "module",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "check-types": "turbo check-types",
+    "dev:native": "turbo -F native dev",
+    "dev:web": "turbo -F web dev",
+    "dev:server": "turbo -F server dev",
+    "db:push": "turbo -F @zentri/db db:push",
+    "db:studio": "turbo -F @zentri/db db:studio",
+    "db:generate": "turbo -F @zentri/db db:generate",
+    "db:migrate": "turbo -F @zentri/db db:migrate",
+    "db:start": "turbo -F @zentri/db db:start",
+    "db:watch": "turbo -F @zentri/db db:watch",
+    "db:stop": "turbo -F @zentri/db db:stop",
+    "db:down": "turbo -F @zentri/db db:down",
+    "check": "biome check --write .",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "@zentri/env": "workspace:*",
+    "dotenv": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.2.0",
+    "@types/node": "^22.13.14",
+    "@zentri/config": "workspace:*",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.2",
+    "turbo": "^2.6.3",
+    "typescript": "catalog:"
+  },
+  "lint-staged": {
+    "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": [
+      "biome check --write ."
+    ]
+  },
+  "packageManager": "pnpm@10.18.3"
+}
